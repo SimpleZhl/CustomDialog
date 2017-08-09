@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- GridView color -->
+    <color name="float_transparent">#00000000</color>
+
+    <!-- KeyBoard background -->
+    <color name="keyboard_background_color">#cccccc</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- CustomAlertDialog color -->
+    <color name="sweet_dialog_bg_color">#FFFFFF</color>
+    <color name="error_stroke_color">#FF0000</color>
+    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="cancel_button_text">#333333</color>
+
+    <!-- unimportant text color -->
+    <color name="prompt_text_color">#858585</color>
+</resources>

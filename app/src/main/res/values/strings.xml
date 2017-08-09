@@ -1,0 +1,16 @@
+<resources xmlns:xliff="http://schemas.android.com/tools">
+    <string name="app_name">CustomDialog</string>
+
+    <string name="sec">s</string>
+    <string name="err_password">Wrong Password!</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_ok">OK</string>
+
+    <string name="btn_alert_success">Alert Success</string>
+    <string name="btn_alert_error">Alert Error</string>
+    <string name="btn_alert_exit">Alert Exit</string>
+
+    <string name="dialog_trans_succ_liff"><xliff:g id="SUCCESS">%1$s</xliff:g> Success</string>
+
+    <string name="exit_app">Exit Current APP?</string>
+</resources>
