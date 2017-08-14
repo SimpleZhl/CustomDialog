@@ -15,29 +15,93 @@
         android:textAllCaps="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp"
-        android:id="@+id/btn_success" />
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_success"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="42dp"
+        android:layout_marginStart="42dp" />
 
     <Button
         android:text="@string/btn_alert_error"
         android:textAllCaps="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_success"
-        android:layout_alignLeft="@+id/btn_success"
-        android:layout_alignStart="@+id/btn_success"
-        android:layout_marginTop="61dp"
-        android:id="@+id/btn_error" />
+        android:id="@+id/btn_error"
+        android:layout_alignTop="@+id/btn_success"
+        android:layout_toRightOf="@+id/btn_success"
+        android:layout_toEndOf="@+id/btn_success"
+        android:layout_marginLeft="53dp"
+        android:layout_marginStart="53dp" />
 
     <Button
         android:text="@string/btn_alert_exit"
         android:textAllCaps="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_error"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_exit"
+        android:layout_below="@+id/btn_success"
+        android:layout_alignLeft="@+id/btn_success"
+        android:layout_alignStart="@+id/btn_success" />
+
+    <Button
+        android:text="@string/btn_alert_success_confirm"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_success_confirm"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_alignBaseline="@+id/btn_exit"
+        android:layout_alignBottom="@+id/btn_exit"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="@string/btn_alert_error_confirm"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_error_confirm"
+        android:layout_below="@+id/btn_exit"
+        android:layout_alignLeft="@+id/btn_exit"
+        android:layout_alignStart="@+id/btn_exit"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:text="@string/btn_alert_normal"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_normal"
+        android:layout_alignTop="@+id/btn_error_confirm"
         android:layout_alignLeft="@+id/btn_error"
-        android:layout_alignStart="@+id/btn_error"
-        android:layout_marginTop="61dp"
-        android:id="@+id/btn_exit" />
+        android:layout_alignStart="@+id/btn_error" />
+
+    <Button
+        android:text="@string/btn_alert_progress"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_progress"
+        android:layout_below="@+id/btn_error_confirm"
+        android:layout_alignLeft="@+id/btn_error_confirm"
+        android:layout_alignStart="@+id/btn_error_confirm" />
+
+    <Button
+        android:text="@string/btn_alert_input_type"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_input_type"
+        android:layout_alignBaseline="@+id/btn_progress"
+        android:layout_alignBottom="@+id/btn_progress"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/btn_error_confirm"
+        android:layout_toEndOf="@+id/btn_error_confirm" />
+
 </RelativeLayout>

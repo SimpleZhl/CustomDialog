@@ -12,6 +12,11 @@ public class MainActivity extends AppCompatActivity {
     private Button successBtn;
     private Button errorBtn;
     private Button exitBtn;
+    private Button successConfirmBtn;
+    private Button errorConfirmBtn;
+    private Button normalBtn;
+    private Button progressBtn;
+    private Button customEnterBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         successBtn = (Button) findViewById(R.id.btn_success);
         errorBtn = (Button) findViewById(R.id.btn_error);
         exitBtn = (Button) findViewById(R.id.btn_exit);
+        successConfirmBtn = (Button) findViewById(R.id.btn_success_confirm);
+        errorConfirmBtn = (Button) findViewById(R.id.btn_error_confirm);
+        normalBtn = (Button) findViewById(R.id.btn_normal);
+        progressBtn = (Button) findViewById(R.id.btn_progress);
+        customEnterBtn = (Button) findViewById(R.id.btn_input_type);
     }
 
     private void setListeners(){
@@ -37,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onDismiss(DialogInterface dialog) {
 
                     }
-                }, 5);
+                }, 3);
             }
         });
 
@@ -49,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onDismiss(DialogInterface dialog) {
 
                     }
-                }, 5);
+                }, 3);
             }
         });
 
@@ -57,6 +67,41 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DialogUtils.showExitAppDialog(MainActivity.this);
+            }
+        });
+
+        successConfirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtils.showSuccMessageWithConfirm(MainActivity.this, "Success message...", 3);
+            }
+        });
+
+        errorConfirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtils.showErrMessageWithConfirm(MainActivity.this, "Error message...", 3);
+            }
+        });
+
+        normalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtils.showNormalDialogWithConfirm(MainActivity.this, "Title", "Normal message...", 3, CustomAlertDialog.NORMAL_TYPE);
+            }
+        });
+
+        progressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtils.showProcessDialog(MainActivity.this, "Title", "Message...", 3, CustomAlertDialog.PROGRESS_TYPE);
+            }
+        });
+
+        customEnterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogUtils.showProcessDialog(MainActivity.this, "Title", "Message...", 3, CustomAlertDialog.CUSTOM_ENTER_TYPE);
             }
         });
     }

@@ -9,6 +9,13 @@
     <string name="btn_alert_success">Alert Success</string>
     <string name="btn_alert_error">Alert Error</string>
     <string name="btn_alert_exit">Alert Exit</string>
+    <string name="btn_alert_success_confirm">Alert Success Confirm</string>
+    <string name="btn_alert_error_confirm">Alert Error Confirm</string>
+    <string name="btn_alert_normal">Alert Normal</string>
+    <string name="btn_alert_progress">Alert Progress</string>
+    <string name="btn_alert_image">Alert Image</string>
+    <string name="btn_alert_warn">Alert Warn</string>
+    <string name="btn_alert_input_type">Alert Input Type</string>
 
     <string name="dialog_trans_succ_liff"><xliff:g id="SUCCESS">%1$s</xliff:g> Success</string>
 

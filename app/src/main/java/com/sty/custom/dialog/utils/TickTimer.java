@@ -1,6 +1,7 @@
 package com.sty.custom.dialog.utils;
 
 import android.os.CountDownTimer;
+import android.util.Log;
 
 /**
  * Created by shity on 2017/8/8/0008.
@@ -35,6 +36,7 @@ public class TickTimer {
             if(listener != null){
                 listener.onTick(millisUntilFinished / 1000);
             }
+            Log.i("Tag", "millisUntilFinished:-->" + millisUntilFinished);
         }
 
         @Override

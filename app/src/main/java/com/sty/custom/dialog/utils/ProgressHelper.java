@@ -41,36 +41,36 @@ public class ProgressHelper {
         updatePropsIfNeed();
     }
 
-    private void updatePropsIfNeed(){
-        if(mProgressWheel != null){
-            if (!mToSpin && mProgressWheel.isSpinning()){
+    private void updatePropsIfNeed() {
+        if (mProgressWheel != null) {
+            if (!mToSpin && mProgressWheel.isSpinning()) {
                 mProgressWheel.stopSpinning();
-            } else if(mToSpin && !mProgressWheel.isSpinning()){
+            } else if (mToSpin && !mProgressWheel.isSpinning()) {
+                mProgressWheel.spin();
+            }
+            if (Float.compare(mSpinSpeed, mProgressWheel.getSpinSpeed()) != 0) {
                 mProgressWheel.setSpinSpeed(mSpinSpeed);
             }
-            if(Float.compare(mSpinSpeed, mProgressWheel.getSpinSpeed()) != 0){
-                mProgressWheel.setSpinSpeed(mSpinSpeed);
-            }
-            if(mBarWidth != mProgressWheel.getBarWidth()){
+            if (mBarWidth != mProgressWheel.getBarWidth()) {
                 mProgressWheel.setBarWidth(mBarWidth);
             }
-            if(mBarColor != mProgressWheel.getBarColor()){
+            if (mBarColor != mProgressWheel.getBarColor()) {
                 mProgressWheel.setBarColor(mBarColor);
             }
-            if(mRimWidth != mProgressWheel.getRimWidth()){
+            if (mRimWidth != mProgressWheel.getRimWidth()) {
                 mProgressWheel.setRimWidth(mRimWidth);
             }
-            if(mRimColor != mProgressWheel.getRimColor()){
+            if (mRimColor != mProgressWheel.getRimColor()) {
                 mProgressWheel.setRimColor(mRimColor);
             }
-            if(Float.compare(mProgressVal, mProgressWheel.getProgress()) != 0){
-                if(mIsInstantProgress){
+            if (Float.compare(mProgressVal, mProgressWheel.getProgress()) != 0) {
+                if (mIsInstantProgress) {
                     mProgressWheel.setInstantProgress(mProgressVal);
-                }else{
+                } else {
                     mProgressWheel.setProgress(mProgressVal);
                 }
             }
-            if(mCircleRadius != mProgressWheel.getCircleRadius()){
+            if (mCircleRadius != mProgressWheel.getCircleRadius()) {
                 mProgressWheel.setCircleRadius(mCircleRadius);
             }
         }

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -258,7 +260,7 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
 
             @Override
             public void onFinish() {
-                if (mAlertType == ERROR_TYPE || mAlertType == SUCCESS_TYPE) {
+                if (mAlertType == ERROR_TYPE || mAlertType == SUCCESS_TYPE ) {
                     CustomAlertDialog.super.dismiss();
                 }
 
@@ -267,9 +269,11 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
                     mCancelClickListener.onClick(CustomAlertDialog.this);
                 }
 
-                String tick = 0 + getContext().getString(R.string.sec);
+                final String tick = 0 + getContext().getString(R.string.sec);
                 mCountView.setText(tick);
                 tickTimer.stop();
+
+                dismiss();
             }
         });
         tickTimer.start(time);
