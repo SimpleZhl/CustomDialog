@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.os.ConditionVariable;
+import android.util.Log;
 import android.view.KeyEvent;
 
 import com.sty.custom.dialog.CustomAlertDialog;
@@ -30,24 +31,18 @@ public class DialogUtils {
      * @param timeout
      */
     public static void showErrMessage(final Context context, final String title, final String msg,
-                                      final OnDismissListener listener, final int timeout){
+                                      final OnDismissListener listener, final int timeout, final boolean isNewLayout){
         MyApplication.getApp().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if(dialog != null){
                     dialog.dismiss();
                 }
-                dialog = new CustomAlertDialog(context, CustomAlertDialog.ERROR_TYPE, true, timeout);
+                dialog = new CustomAlertDialog(context, CustomAlertDialog.ERROR_TYPE, true, timeout, isNewLayout);
                 dialog.setTitleText(title);
                 dialog.setContentText(msg);
-                dialog.setCanceledOnTouchOutside(true);
                 dialog.show();
-                dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-                    @Override
-                    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                        return keyCode == KeyEvent.KEYCODE_BACK;
-                    }
-                });
+                dialog.setCanceledOnTouchOutside(true);
                 dialog.setOnDismissListener(listener);
             }
         });
@@ -61,7 +56,8 @@ public class DialogUtils {
      * @param timeout
      */
     public static void showSuccMessage(final Context context, final String title,
-                                       final OnDismissListener listener, final int timeout){
+                                        final OnDismissListener listener, final int timeout,
+                                        final boolean isNewLayout){
         if(context == null){
             return;
         }
@@ -71,11 +67,11 @@ public class DialogUtils {
                 if(dialog != null){
                     dialog.dismiss();
                 }
-                dialog = new CustomAlertDialog(context, CustomAlertDialog.SUCCESS_TYPE, true, timeout);
-                dialog.showContentText(false);
+                dialog = new CustomAlertDialog(context, CustomAlertDialog.SUCCESS_TYPE, true, timeout, isNewLayout);
                 dialog.setTitleText(context.getString(R.string.dialog_trans_succ_liff, title));
-                dialog.setCanceledOnTouchOutside(true);
+                dialog.showContentText(false);
                 dialog.show();
+                dialog.setCanceledOnTouchOutside(true);
                 dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
                     @Override
                     public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
@@ -87,12 +83,12 @@ public class DialogUtils {
         });
     }
 
-    public static void showSuccMessageWithConfirm(final Context context, final String message, final int timeout){
-        showMessageWithConfirm(context, message, timeout, CustomAlertDialog.SUCCESS_TYPE);
+    public static void showSuccMessageWithConfirm(final Context context, final String message, final int timeout, final boolean isNewLayout){
+        showMessageWithConfirm(context, message, timeout, CustomAlertDialog.SUCCESS_TYPE, isNewLayout);
     }
 
-    public static void showErrMessageWithConfirm(final Context context, final String message, final int timeout){
-        showMessageWithConfirm(context, message, timeout, CustomAlertDialog.ERROR_TYPE);
+    public static void showErrMessageWithConfirm(final Context context, final String message, final int timeout, final boolean isNewLayout){
+        showMessageWithConfirm(context, message, timeout, CustomAlertDialog.ERROR_TYPE, isNewLayout);
     }
 
     /**
@@ -102,22 +98,23 @@ public class DialogUtils {
      * @param timeout
      * @param alertType
      */
-    public static void showMessageWithConfirm(final Context context, final String message, final int timeout, final int alertType){
-        //final ConditionVariable cv = new ConditionVariable();
+    public static void showMessageWithConfirm(final Context context, final String message,
+                                              final int timeout, final int alertType,
+                                              final boolean isNewLayout){
         MyApplication.getApp().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if(dialog != null){
                     dialog.dismiss();
                 }
-                dialog = new CustomAlertDialog(context, alertType, timeout);
+                dialog = new CustomAlertDialog(context, alertType, timeout, isNewLayout);
                 dialog.setContentText(message);
                 dialog.show();
                 dialog.showConfirmButton(true);
-                dialog.setOnDismissListener(new OnDismissListener() {
+                dialog.setConfirmClickListener(new CustomAlertDialog.OnCustomClickListener() {
                     @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        //cv.open();
+                    public void onClick(CustomAlertDialog alertDialog) {
+                        dialog.dismiss();
                     }
                 });
             }
@@ -132,16 +129,19 @@ public class DialogUtils {
      * @param timeout
      * @param alertType
      */
-    public static void showProcessDialog(final Context context, final String title, final String message, final int timeout, final int alertType){
+    public static void showProcessDialog(final Context context, final String title,
+                                         final String message, final int timeout, final int alertType,
+                                         final boolean isNewLayout){
         MyApplication.getApp().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if(dialog != null){
                     dialog.dismiss();
                 }
-                dialog = new CustomAlertDialog(context, alertType, timeout);
+                dialog = new CustomAlertDialog(context, alertType, timeout, isNewLayout);
                 dialog.setTitleText(title);
                 dialog.setContentText(message);
+                dialog.show();
                 dialog.setCancelable(false);
                 dialog.setTimeout(timeout);
                 dialog.setOnDismissListener(new OnDismissListener() {
@@ -150,10 +150,36 @@ public class DialogUtils {
                         //dialog.dismiss();
                     }
                 });
-                dialog.show();
             }
         });
     }
+
+    public static void showInputTypeDialog(final Context context, final String title, final String errTipsText,
+                                           final int alertType, final boolean isNewLayout){
+        if(dialog != null){
+            dialog.dismiss();
+        }
+        dialog = new CustomAlertDialog(context, alertType, isNewLayout);
+        dialog.setTitleText(title);
+        dialog.show();
+        dialog.setErrTipsText(errTipsText);
+        dialog.setCancelable(false);
+        dialog.setCancelClickListener(new CustomAlertDialog.OnCustomClickListener() {
+            @Override
+            public void onClick(CustomAlertDialog alertDialog) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setConfirmClickListener(new CustomAlertDialog.OnCustomClickListener() {
+            @Override
+            public void onClick(CustomAlertDialog alertDialog) {
+                dialog.dismiss();
+            }
+        });
+        dialog.showCancelButton(true);
+        dialog.showConfirmButton(true);
+    }
+
     /**
      * 显示对话框
      * @param context
@@ -162,19 +188,21 @@ public class DialogUtils {
      * @param timeout
      * @param alertType
      */
-    public static void showNormalDialogWithConfirm(final Context context, final String title, final String message, final int timeout, final int alertType){
+    public static void showNormalDialogWithConfirm(final Context context, final String title,
+                                                   final String message, final int timeout,
+                                                   final int alertType, final boolean isNewLayout){
         MyApplication.getApp().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if(dialog != null){
                     dialog.dismiss();
                 }
-                dialog = new CustomAlertDialog(context, alertType, timeout);
+                dialog = new CustomAlertDialog(context, alertType, timeout, isNewLayout);
+                dialog.setTitleText(title);
+                dialog.setContentText(message);
                 dialog.show();
                 dialog.setCancelable(false);
                 dialog.setTimeout(timeout);
-                dialog.setTitleText(title);
-                dialog.setContentText(message);
                 dialog.showConfirmButton(true);
             }
         });
@@ -183,11 +211,13 @@ public class DialogUtils {
      * 退出当前应用
      * @param context
      */
-    public static void showExitAppDialog(final Context context){
+    public static void showExitAppDialog(final Context context, final boolean isNewLayout){
         if(dialog != null){
             dialog.dismiss();
         }
-        dialog = new CustomAlertDialog(context, CustomAlertDialog.NORMAL_TYPE);
+        dialog = new CustomAlertDialog(context, CustomAlertDialog.NORMAL_TYPE, isNewLayout);
+        dialog.setTitleText(context.getString(R.string.exit_app));
+        dialog.show();
         dialog.setCancelClickListener(new CustomAlertDialog.OnCustomClickListener() {
             @Override
             public void onClick(CustomAlertDialog alertDialog) {
@@ -205,8 +235,31 @@ public class DialogUtils {
                 android.os.Process.killProcess(android.os.Process.myPid());
             }
         });
+        dialog.showCancelButton(true);
+        dialog.showConfirmButton(true);
+    }
+
+    public static void showImageTypeDialog(final Context context, String contentMsg, int imageResourceId,
+                                           final boolean isNewLayout){
+        if(dialog != null){
+            dialog.dismiss();
+        }
+        dialog = new CustomAlertDialog(context, CustomAlertDialog.IMAGE_TYPE, isNewLayout);
+        dialog.setContentText(contentMsg);
         dialog.show();
-        dialog.setNormalText(context.getString(R.string.exit_app));
+        dialog.setCancelClickListener(new CustomAlertDialog.OnCustomClickListener() {
+            @Override
+            public void onClick(CustomAlertDialog alertDialog) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setConfirmClickListener(new CustomAlertDialog.OnCustomClickListener() {
+            @Override
+            public void onClick(CustomAlertDialog alertDialog) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setImage(imageResourceId);
         dialog.showCancelButton(true);
         dialog.showConfirmButton(true);
     }

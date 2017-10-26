@@ -6,8 +6,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -26,7 +24,6 @@ import com.sty.custom.dialog.utils.ProgressHelper;
 import com.sty.custom.dialog.utils.ProgressWheel;
 import com.sty.custom.dialog.utils.SuccessTickView;
 import com.sty.custom.dialog.utils.TickTimer;
-import com.sty.custom.dialog.utils.Utils;
 
 import java.util.List;
 
@@ -38,6 +35,9 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
     private View mDialogView;
     private int mAlertType;
     private boolean mTouchToDismiss = false;
+
+    private boolean isNewLayout = false;
+    private View mDialogDivider;
 
     private TickTimer tickTimer;
 
@@ -139,13 +139,14 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
         void onClick(CustomAlertDialog alertDialog);
     }
 
-    public CustomAlertDialog(Context context) {
-        this(context, NORMAL_TYPE);
+    public CustomAlertDialog(Context context, boolean isNewLayout) {
+        this(context, NORMAL_TYPE, isNewLayout);
     }
 
-    public CustomAlertDialog(Context context, int alertType) {
+    public CustomAlertDialog(Context context, int alertType, boolean isNewLayout) {
         super(context, R.style.alert_dialog);
         this.mAlertType = alertType;
+        this.isNewLayout = isNewLayout;
         setCancelable(true);
         setCanceledOnTouchOutside(false);
         mProgressHelper = new ProgressHelper(context);
@@ -172,13 +173,13 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
 
     }
 
-    public CustomAlertDialog(Context context, int alertType, int timeout) {
-        this(context, alertType);
+    public CustomAlertDialog(Context context, int alertType, int timeout, boolean isNewLayout) {
+        this(context, alertType, isNewLayout);
         setTimeout(timeout);
     }
 
-    public CustomAlertDialog(Context context, int alertType, boolean touchToDimiss, int timeout) {
-        this(context, alertType, timeout);
+    public CustomAlertDialog(Context context, int alertType, boolean touchToDimiss, int timeout, boolean isNewLayout) {
+        this(context, alertType, timeout, isNewLayout);
         this.mTouchToDismiss = touchToDimiss;
     }
 
@@ -194,7 +195,11 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.alert_dialog_layout);
+        if(isNewLayout) {
+            setContentView(R.layout.alert_dialog_layout_new);
+        }else{
+            setContentView(R.layout.alert_dialog_layout);
+        }
 
         Window window = getWindow();
         if (window == null)
@@ -226,6 +231,8 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
 
         mTitleTextView = (TextView) findViewById(R.id.title_text);
         mContentTextView = (TextView) findViewById(R.id.content_text);
+
+        mDialogDivider = findViewById(R.id.dialog_divider);
 
         mConfirmButton.setOnClickListener(this);
         mCancelButton.setOnClickListener(this);
@@ -318,6 +325,13 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
         return this;
     }
 
+    public CustomAlertDialog setImage(int resourceId){
+        if(mImageView != null && resourceId > 0){
+            showImage(true);
+            mImageView.setImageResource(resourceId);
+        }
+        return this;
+    }
     /**
      * 获取Normal Text 显示状态
      *
@@ -439,6 +453,12 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
         if (mCancelButton != null) {
             mCancelButton.setVisibility(mShowCancel ? View.VISIBLE : View.GONE);
         }
+        if (mDialogDivider != null){
+            mDialogDivider.setVisibility(mShowCancel ? View.VISIBLE : View.GONE);
+        }
+        if (mButtonLayout != null){
+            mButtonLayout.setVisibility(mShowCancel ? View.VISIBLE : View.GONE);
+        }
         return this;
     }
 
@@ -481,6 +501,12 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
         mShowConfirm = isShow;
         if (mConfirmButton != null) {
             mConfirmButton.setVisibility(mShowConfirm ? View.VISIBLE : View.GONE);
+        }
+        if (mDialogDivider != null){
+            mDialogDivider.setVisibility(mShowConfirm ? View.VISIBLE : View.GONE);
+        }
+        if (mButtonLayout != null){
+            mButtonLayout.setVisibility(mShowConfirm ? View.VISIBLE : View.GONE);
         }
         return this;
     }
@@ -572,8 +598,9 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
         switch (mAlertType) {
 
             case NORMAL_TYPE:
-                if (isShowConfirmButton())
-                    mConfirmButton.setVisibility(View.VISIBLE);
+                if (isShowConfirmButton()) {
+                    showConfirmButton(true);
+                }
                 break;
             case ERROR_TYPE:
                 mErrorFrame.setVisibility(View.VISIBLE);
@@ -586,24 +613,25 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
                 break;
             case CUSTOM_ENTER_TYPE:
                 mPwdLayout.setVisibility(View.VISIBLE);
-                mCancelButton.setVisibility(View.VISIBLE);
-                mConfirmButton.setVisibility(View.VISIBLE);
+                showCancelButton(true);
+                showConfirmButton(true);
                 break;
             case PROGRESS_TYPE:
                 mProgressLayout.setVisibility(View.VISIBLE);
-                mConfirmButton.setVisibility(View.GONE);
+                showCancelButton(false);
+                showConfirmButton(false);
                 break;
             case IMAGE_TYPE:
                 mImageView.setVisibility(View.VISIBLE);
-                mTitleTextView.setVisibility(View.GONE);
-                mCancelButton.setVisibility(View.VISIBLE);
-                mConfirmButton.setVisibility(View.VISIBLE);
+                mContentTextView.setVisibility(View.VISIBLE);
+                showCancelButton(true);
+                showConfirmButton(true);
                 break;
             case WARN_TYPE:
                 mImageView.setVisibility(View.VISIBLE);
                 mTitleTextView.setVisibility(View.GONE);
-                mCancelButton.setVisibility(View.GONE);
-                mConfirmButton.setVisibility(View.GONE);
+                showCancelButton(false);
+                showConfirmButton(false);
                 break;
             default:
                 break;
@@ -648,6 +676,10 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
         mImageView.setVisibility(View.GONE);
         mNormalTextView.setVisibility(View.GONE);
         mErrTipsView.setVisibility(View.INVISIBLE);
+
+        if(mDialogDivider != null){
+            mDialogDivider.setVisibility(View.GONE);
+        }
 
         mErrorFrame.clearAnimation();
         mErrorX.clearAnimation();

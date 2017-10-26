@@ -17,7 +17,19 @@
     <string name="btn_alert_warn">Alert Warn</string>
     <string name="btn_alert_input_type">Alert Input Type</string>
 
+    <string name="btn_alert_success_new">Alert Success 2</string>
+    <string name="btn_alert_error_new">Alert Error 2</string>
+    <string name="btn_alert_exit_new">Alert Exit 2</string>
+    <string name="btn_alert_success_confirm_new">alert success confirm2</string>
+    <string name="btn_alert_error_confirm_new">Alert Error Confirm 2</string>
+    <string name="btn_alert_normal_new">Alert Normal 2</string>
+    <string name="btn_alert_progress_new">Alert Progress 2</string>
+    <string name="btn_alert_image_new">Alert Image 2</string>
+    <string name="btn_alert_warn_new">Alert Warn 2</string>
+    <string name="btn_alert_input_type_new">Alert Input Type 2</string>
+
     <string name="dialog_trans_succ_liff"><xliff:g id="SUCCESS">%1$s</xliff:g> Success</string>
 
     <string name="exit_app">Exit Current APP?</string>
+    <string name="image_alert_type_content">The printer is short of paper, reload and continue to print?</string>
 </resources>

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -23,8 +23,18 @@
         <item name="android:layout_width">@dimen/alert_width_small</item>
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:textSize">@dimen/font_size_smaller</item>
-        <item name="android:paddingStart">0dp</item>
-        <item name="android:paddingEnd">0dp</item>
+        <item name="android:paddingStart" tools:targetApi="jelly_bean_mr1">0dp</item>
+        <item name="android:paddingEnd" tools:targetApi="jelly_bean_mr1">0dp</item>
         <item name="android:textColor">@color/prompt_text_color</item>
+    </style>
+
+    <style name="Roboto_Regular_14">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Roboto_Regular_18">
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif</item>
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>

@@ -17,7 +17,19 @@
     <string name="btn_alert_warn">警告</string>
     <string name="btn_alert_input_type">输入类型</string>
 
+    <string name="btn_alert_success_new">成功类型2</string>
+    <string name="btn_alert_error_new">错误类型2</string>
+    <string name="btn_alert_exit_new">退出类型2</string>
+    <string name="btn_alert_success_confirm_new">成功确认类型2</string>
+    <string name="btn_alert_error_confirm_new">错误确认类型2</string>
+    <string name="btn_alert_normal_new">正常类型2</string>
+    <string name="btn_alert_progress_new">进度类型2</string>
+    <string name="btn_alert_image_new">图像类型2</string>
+    <string name="btn_alert_warn_new">警告类型2</string>
+    <string name="btn_alert_input_type_new">输入类型2</string>
+
     <string name="dialog_trans_succ_liff"><xliff:g id="SUCCESS">%1$s</xliff:g> 成功..</string>
 
     <string name="exit_app">退出应用?</string>
+    <string name="image_alert_type_content">打印机缺纸，重新加载并打印?</string>
 </resources>
