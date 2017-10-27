@@ -29,8 +29,8 @@
 
         <FrameLayout
             android:id="@+id/error_frame"
-            android:layout_width="@dimen/dialog_icon_new"
-            android:layout_height="@dimen/dialog_icon_new"
+            android:layout_width="@dimen/error_success_frame_circle_wh"
+            android:layout_height="@dimen/error_success_frame_circle_wh"
             android:layout_marginTop="@dimen/dialog_icon_margin_top"
             android:visibility="gone">
 
@@ -50,8 +50,8 @@
 
         <FrameLayout
             android:id="@+id/success_frame"
-            android:layout_width="@dimen/dialog_icon_new"
-            android:layout_height="@dimen/dialog_icon_new"
+            android:layout_width="@dimen/error_success_frame_circle_wh"
+            android:layout_height="@dimen/error_success_frame_circle_wh"
             android:layout_marginTop="@dimen/dialog_icon_margin_top"
             android:visibility="gone">
 

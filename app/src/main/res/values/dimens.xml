@@ -59,6 +59,7 @@
     <dimen name="alert_width_new">248dp</dimen>
     <dimen name="alert_height_new">260dp</dimen>
     <dimen name="dialog_icon_new">100dp</dimen>
+    <dimen name="error_success_frame_circle_wh">60dp</dimen>
     <dimen name="dialog_icon_margin_top">24dp</dimen>
     <dimen name="normal_text_view_margin_top">20dp</dimen>
     <dimen name="normal_text_view_margin_bottom">16dp</dimen>
