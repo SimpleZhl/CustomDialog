@@ -115,8 +115,12 @@
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginTop="@dimen/dialog_icon_margin_top"
-            android:maxLines="1"
+            android:layout_marginLeft="@dimen/title_text_view_margin_lr"
+            android:layout_marginRight="@dimen/title_text_view_margin_lr"
+            android:maxLines="2"
             android:textColor="@color/trans_detail_color_normal"
             style="@style/Roboto_Regular_18"
             android:visibility="gone" />

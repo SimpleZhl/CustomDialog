@@ -61,6 +61,7 @@
     <dimen name="dialog_icon_new">100dp</dimen>
     <dimen name="error_success_frame_circle_wh">60dp</dimen>
     <dimen name="dialog_icon_margin_top">24dp</dimen>
+    <dimen name="title_text_view_margin_lr">16dp</dimen>
     <dimen name="normal_text_view_margin_top">20dp</dimen>
     <dimen name="normal_text_view_margin_bottom">16dp</dimen>
     <dimen name="content_text_view_margin_top">20dp</dimen>
