@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DialogUtils.showSuccMessage(MainActivity.this, "Transaction ", null, 3, false);
                 break;
             case R.id.btn_success_confirm:
-                DialogUtils.showSuccMessageWithConfirm(MainActivity.this, "Success message...", 3, false);
+                DialogUtils.showSuccMessageWithConfirm(MainActivity.this, "Success message...", false);
                 break;
             case R.id.btn_error:
                 DialogUtils.showErrMessage(MainActivity.this, "error!", "Error message...", null, 3, false);
                 break;
             case R.id.btn_error_confirm:
-                DialogUtils.showErrMessageWithConfirm(MainActivity.this, "Error message...", 3, false);
+                DialogUtils.showErrMessageWithConfirm(MainActivity.this, "Error message...", false);
                 break;
             case R.id.btn_progress:
                 DialogUtils.showProcessDialog(MainActivity.this, "Title", "Message...", 3, CustomAlertDialog.PROGRESS_TYPE, false);
@@ -124,13 +124,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DialogUtils.showSuccMessage(MainActivity.this, "Transaction ", null, 3, true);
                 break;
             case R.id.btn_success_confirm_new:
-                DialogUtils.showSuccMessageWithConfirm(MainActivity.this, "Success message...", 3, true);
+                DialogUtils.showSuccMessageWithConfirm(MainActivity.this, "Success message...", true);
                 break;
             case R.id.btn_error_new:
-                DialogUtils.showErrMessage(MainActivity.this, "error!", "Error message...", null, 3, true);
+                DialogUtils.showErrMessage(MainActivity.this, "error!", getString(R.string.response_C1), null, 3, true);
                 break;
             case R.id.btn_error_confirm_new:
-                DialogUtils.showErrMessageWithConfirm(MainActivity.this, "Error message...", 3, true);
+                DialogUtils.showErrMessageWithConfirm(MainActivity.this, "Error message...", true);
                 break;
             case R.id.btn_progress_new:
                 DialogUtils.showProcessDialog(MainActivity.this, "Title", "Message...", 3, CustomAlertDialog.PROGRESS_TYPE, true);

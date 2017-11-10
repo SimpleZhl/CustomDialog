@@ -22,5 +22,6 @@
     <color name="prompt_text_color">#858585</color>
 
     <color name="trans_detail_color_normal">#202020</color>
+    <color name="trans_detail_color_gray">#717171</color>
     <color name="new_dialog_divider_bg">#E3E4EA</color>
 </resources>

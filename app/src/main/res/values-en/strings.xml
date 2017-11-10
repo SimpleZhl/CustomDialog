@@ -32,4 +32,5 @@
 
     <string name="exit_app">Exit Current APP?</string>
     <string name="image_alert_type_content">The printer is short of paper, reload and continue to print?</string>
+    <string name="response_C1">Merchant order number, batch number and serial number are not delivered</string>
 </resources>

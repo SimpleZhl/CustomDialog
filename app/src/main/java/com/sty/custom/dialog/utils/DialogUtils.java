@@ -83,31 +83,29 @@ public class DialogUtils {
         });
     }
 
-    public static void showSuccMessageWithConfirm(final Context context, final String message, final int timeout, final boolean isNewLayout){
-        showMessageWithConfirm(context, message, timeout, CustomAlertDialog.SUCCESS_TYPE, isNewLayout);
+    public static void showSuccMessageWithConfirm(final Context context, final String message, final boolean isNewLayout){
+        showMessageWithConfirm(context, message, CustomAlertDialog.SUCCESS_TYPE, isNewLayout);
     }
 
-    public static void showErrMessageWithConfirm(final Context context, final String message, final int timeout, final boolean isNewLayout){
-        showMessageWithConfirm(context, message, timeout, CustomAlertDialog.ERROR_TYPE, isNewLayout);
+    public static void showErrMessageWithConfirm(final Context context, final String message, final boolean isNewLayout){
+        showMessageWithConfirm(context, message, CustomAlertDialog.ERROR_TYPE, isNewLayout);
     }
 
     /**
      * 带确认按钮的提示信息
      * @param context
      * @param message
-     * @param timeout
      * @param alertType
      */
     public static void showMessageWithConfirm(final Context context, final String message,
-                                              final int timeout, final int alertType,
-                                              final boolean isNewLayout){
+                                              final int alertType, final boolean isNewLayout){
         MyApplication.getApp().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if(dialog != null){
                     dialog.dismiss();
                 }
-                dialog = new CustomAlertDialog(context, alertType, timeout, isNewLayout);
+                dialog = new CustomAlertDialog(context, alertType, isNewLayout);
                 dialog.setContentText(message);
                 dialog.show();
                 dialog.showConfirmButton(true);

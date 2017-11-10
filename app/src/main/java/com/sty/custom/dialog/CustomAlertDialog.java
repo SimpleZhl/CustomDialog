@@ -151,25 +151,27 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
         setCanceledOnTouchOutside(false);
         mProgressHelper = new ProgressHelper(context);
 
-        mErrorInAnim = OptAnimationLoader.loadAnimation(getContext(), R.anim.error_frame_in);
-        mErrorXInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.error_x_in);
-        // 2.3.x system don't support alpha-animation on layer-list drawable
-        // remove it from animation set
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
-            List<Animation> childAnims = mErrorXInAnim.getAnimations();
-            int idx = 0;
-            for (; idx < childAnims.size(); idx++) {
-                if (childAnims.get(idx) instanceof AlphaAnimation) {
-                    break;
+        if(!isNewLayout) {
+            mErrorInAnim = OptAnimationLoader.loadAnimation(getContext(), R.anim.error_frame_in);
+            mErrorXInAnim = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(), R.anim.error_x_in);
+            // 2.3.x system don't support alpha-animation on layer-list drawable
+            // remove it from animation set
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
+                List<Animation> childAnims = mErrorXInAnim.getAnimations();
+                int idx = 0;
+                for (; idx < childAnims.size(); idx++) {
+                    if (childAnims.get(idx) instanceof AlphaAnimation) {
+                        break;
+                    }
+                }
+                if (idx < childAnims.size()) {
+                    childAnims.remove(idx);
                 }
             }
-            if (idx < childAnims.size()) {
-                childAnims.remove(idx);
-            }
+            mSuccessBowAnim = OptAnimationLoader.loadAnimation(getContext(), R.anim.success_bow_roate);
+            mSuccessLayoutAnimSet = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(),
+                    R.anim.success_mask_layout);
         }
-        mSuccessBowAnim = OptAnimationLoader.loadAnimation(getContext(), R.anim.success_bow_roate);
-        mSuccessLayoutAnimSet = (AnimationSet) OptAnimationLoader.loadAnimation(getContext(),
-                R.anim.success_mask_layout);
 
     }
 
@@ -608,8 +610,10 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
             case SUCCESS_TYPE:
                 mSuccessFrame.setVisibility(View.VISIBLE);
                 // initial rotate layout of success mask
-                mSuccessLeftMask.startAnimation(mSuccessLayoutAnimSet.getAnimations().get(0));
-                mSuccessRightMask.startAnimation(mSuccessLayoutAnimSet.getAnimations().get(1));
+                if(!isNewLayout) {
+                    mSuccessLeftMask.startAnimation(mSuccessLayoutAnimSet.getAnimations().get(0));
+                    mSuccessRightMask.startAnimation(mSuccessLayoutAnimSet.getAnimations().get(1));
+                }
                 break;
             case CUSTOM_ENTER_TYPE:
                 mPwdLayout.setVisibility(View.VISIBLE);
@@ -648,7 +652,9 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
         if (!fromCreate) {
             restore();
             changeAlertView();
-            playAnimation();
+            if(!isNewLayout) {
+                playAnimation();
+            }
         } else {
             changeAlertView();
         }
@@ -681,17 +687,21 @@ public class CustomAlertDialog extends Dialog implements View.OnClickListener{
             mDialogDivider.setVisibility(View.GONE);
         }
 
-        mErrorFrame.clearAnimation();
-        mErrorX.clearAnimation();
-        mSuccessTick.clearAnimation();
-        mSuccessLeftMask.clearAnimation();
-        mSuccessRightMask.clearAnimation();
+        if(!isNewLayout) {
+            mErrorFrame.clearAnimation();
+            mErrorX.clearAnimation();
+            mSuccessTick.clearAnimation();
+            mSuccessLeftMask.clearAnimation();
+            mSuccessRightMask.clearAnimation();
+        }
 
     }
 
     @Override
     protected void onStart() {
-        playAnimation();
+        if(!isNewLayout) {
+            playAnimation();
+        }
     }
 
     @Override

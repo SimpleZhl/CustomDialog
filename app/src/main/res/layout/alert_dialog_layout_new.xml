@@ -31,60 +31,26 @@
             android:id="@+id/error_frame"
             android:layout_width="@dimen/error_success_frame_circle_wh"
             android:layout_height="@dimen/error_success_frame_circle_wh"
-            android:layout_marginTop="@dimen/dialog_icon_margin_top"
+            android:layout_marginTop="@dimen/error_success_frame_margin_top"
             android:visibility="gone">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/error_circle" />
-
             <ImageView
-                android:id="@+id/error_x"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/app_name"
-                android:scaleType="center"
-                android:src="@drawable/error_center_x" />
+                android:src="@mipmap/error_icon"/>
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/success_frame"
             android:layout_width="@dimen/error_success_frame_circle_wh"
             android:layout_height="@dimen/error_success_frame_circle_wh"
-            android:layout_marginTop="@dimen/dialog_icon_margin_top"
+            android:layout_marginTop="@dimen/error_success_frame_margin_top"
             android:visibility="gone">
 
-            <View
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/success_bow" />
-
-            <View
-                android:id="@+id/mask_right"
-                android:layout_width="35dp"
-                android:layout_height="80dp"
-                android:layout_gravity="end"
-                android:layout_marginTop="-13dp"
-                android:background="@android:color/white" />
-
-            <View
-                android:id="@+id/mask_left"
-                android:layout_width="21dp"
-                android:layout_height="60dp"
-                android:layout_gravity="start"
-                android:layout_marginLeft="-3dp"
-                android:background="@android:color/white" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/success_circle" />
-
-            <com.sty.custom.dialog.utils.SuccessTickView
-                android:id="@+id/success_tick"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:src="@mipmap/success_icon"/>
         </FrameLayout>
 
         <FrameLayout
@@ -117,12 +83,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="@dimen/dialog_icon_margin_top"
+            android:layout_marginTop="@dimen/title_text_view_margin_top"
             android:layout_marginLeft="@dimen/title_text_view_margin_lr"
             android:layout_marginRight="@dimen/title_text_view_margin_lr"
             android:maxLines="2"
+            android:ellipsize="end"
             android:textColor="@color/trans_detail_color_normal"
-            style="@style/Roboto_Regular_18"
+            style="@style/Roboto_Regular_16"
             android:visibility="gone" />
 
         <LinearLayout
@@ -178,9 +145,10 @@
             android:layout_marginTop="@dimen/content_text_view_margin_top"
             android:layout_marginBottom="@dimen/content_text_view_margin_bottom"
             android:gravity="center"
-            android:textColor="@color/trans_detail_color_normal"
+            android:textColor="@color/trans_detail_color_gray"
             style="@style/Roboto_Regular_14"
-            android:maxLines="2"
+            android:maxLines="3"
+            android:ellipsize="end"
             android:lineSpacingExtra="@dimen/content_text_view_line_space"
             android:visibility="gone" />
     </LinearLayout>

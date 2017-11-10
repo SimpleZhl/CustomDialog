@@ -32,4 +32,5 @@
 
     <string name="exit_app">退出应用?</string>
     <string name="image_alert_type_content">打印机缺纸，重新加载并打印?</string>
+    <string name="response_C1">商户订单号，批次号和流水号未上送</string>
 </resources>
